@@ -33,7 +33,7 @@
                 <ol class="pl-2">
                     @if($value->options)
                         @foreach( json_decode($value->options) as $item )
-                            <li>{{ $value->options }}</li>
+                            <li>{{ $item }}</li>
                         @endforeach
                     @else
                       <li>-</li>
