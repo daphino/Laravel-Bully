@@ -27,18 +27,15 @@
               <td>{{ $value->question }}</td>
               <td>{{ $value->type }}</td>
               <td>
-                @if( !json_decode($value->options) )
-                  -
+                @if($value->options)
+                    <ol class="pl-2">
+                    @foreach( json_decode($value->options) as $item )
+                        <li>{{ $item }}</li>
+                    @endforeach
+                    </ol>
+                @else
+                  <li>-</li>
                 @endif
-                <ol class="pl-2">
-                    @if($value->options)
-                        @foreach( json_decode($value->options) as $item )
-                            <li>{{ $item }}</li>
-                        @endforeach
-                    @else
-                      <li>-</li>
-                    @endif
-                </ol>
               </td>
               <td>{{ $value->order }}</td>
               <td>
