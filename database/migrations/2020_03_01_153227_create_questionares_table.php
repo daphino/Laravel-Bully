@@ -18,7 +18,7 @@ class CreateQuestionaresTable extends Migration
             $table->bigIncrements('id');
             $table->string('question');
             $table->enum('type', ['input', 'check', 'select', 'radio'])->nullable();
-            $table->json('options')->nullable();
+            $table->longText('options')->nullable();
             $table->integer('order');
             $table->timestamps();
         });
