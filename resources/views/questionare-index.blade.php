@@ -27,7 +27,7 @@
               <td>{{ $value->question }}</td>
               <td>{{ $value->type }}</td>
               <td>
-                @if($value->options)
+                @if($value->options != null)
                     <ol class="pl-2">
                     @foreach( json_decode($value->options) as $item )
                         <li>{{ $item }}</li>
