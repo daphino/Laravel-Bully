@@ -31,9 +31,13 @@
                   -
                 @endif
                 <ol class="pl-2">
-{{--                  @foreach( json_decode($value->options) as $item )--}}
-                    <li>{{ $value->options }}</li>
-{{--                  @endforeach--}}
+                    @if($value->options)
+                        @foreach( json_decode($value->options) as $item )
+                            <li>{{ $value->options }}</li>
+                        @endforeach
+                    @else
+                      <li>-</li>
+                    @endif
                 </ol>
               </td>
               <td>{{ $value->order }}</td>

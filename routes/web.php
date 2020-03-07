@@ -1,6 +1,10 @@
 <?php
 Auth::routes(['register'=>false, 'reset'=>false]);
 
+Route::get('/', function (){
+   return json_decode('["SD\/Sederajat","SMP\/Sederajat","SMA\/Sederajat","Diploma I\/II","Diploma III","Diploma IV\/S1","S2","S3"]');
+});
+
 Route::middleware('auth')->namespace('Admin')->group(function() {
 
   Route::prefix('/admin')->name('admin.')->group(function() {
