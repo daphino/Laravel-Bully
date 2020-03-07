@@ -7,7 +7,7 @@
 @section('content')
   <div class="card">
     <div class="card-body">
-      <a href="" class="float-left btn btn-primary mr-2 btn-sm">Tambah</a>
+      <a href="{{route('admin.questionare.create')}}" class="float-left btn btn-primary mr-2 btn-sm">Tambah</a>
       <button type="button" onclick="confirmDelete('*', '/admin/questionare/delete/all');" class="float-left btn btn-danger btn-sm">Hapus Semua</button>
       <table class="datatable table table-bordered table-striped">
         <thead>

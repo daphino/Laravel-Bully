@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Psychiatrist;
 use Illuminate\Http\Request;
-use App\Questionare;
 
-class QuestionareController extends Controller
+class PsychiatristController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class QuestionareController extends Controller
      */
     public function index()
     {
-        $data['questionares'] = Questionare::orderBy('order', 'asc')->get();
-        $data['title'] = 'Daftar Kuesioner';
-        return view('questionare-index')->with($data);
+        $data['psychiatrists'] = Psychiatrist::all();
+        $data['title'] = 'Daftar Psikiater';
+        return view('psychiatrist-index')->with($data);
     }
 
     /**
@@ -27,8 +27,8 @@ class QuestionareController extends Controller
      */
     public function create()
     {
-        $data['title'] = 'Tambah Kuesioner';
-        return view('questionare-create')->with($data);
+        $data['title'] = 'Tambah Psikiater';
+        return view('psychiatrist-create')->with($data);
     }
 
     /**
@@ -39,18 +39,11 @@ class QuestionareController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->options[0]){
-            Questionare::create($request->except(['options', 'token']));
-        }else{
-            $questionare = new Questionare();
-            $questionare->question = $request->question;
-            $questionare->type = $request->type;
-            $questionare->order = $request->order;
-            $questionare->options = json_encode($request->options);
-            $questionare->save();
-        }
+        $data = $request->except('_token');
+        $data['password'] = bcrypt($data['password']);
+        Psychiatrist::create($data);
 
-        return redirect()->route('admin.questionare.index');
+        return redirect()->route('admin.psychiatrist.index');
     }
 
     /**
@@ -61,9 +54,10 @@ class QuestionareController extends Controller
      */
     public function edit($id)
     {
-        $data['questionare'] = Questionare::findOrFail($id);
-        $data['title'] = 'Edit Kuesioner';
-        return view('questionare-edit')->with($data);
+        $psy = Psychiatrist::findOrFail($id);
+        $data['psy'] = $psy;
+        $data['title'] = 'Edit Psikiater';
+        return view('psychiatrist-edit')->with($data);
     }
 
     /**
@@ -75,11 +69,10 @@ class QuestionareController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        dd($request->all());
-        $questinoare = Questionare::findOrFail($id);
-        $questinoare->update($request->except(['_token', '_method']));
+        $psy = Psychiatrist::findOrFail($id);
+        $psy->update($request->except('_token'));
 
-        return redirect()->route('admin.questionare.index');
+        return redirect()->route('admin.psychiatrist.index');
     }
 
     /**
@@ -90,11 +83,12 @@ class QuestionareController extends Controller
      */
     public function destroy($id)
     {
-        Questionare::findOrFail($id)->delete();
+        $psy = Psychiatrist::findOrFail($id);
+        $psy->delete();
     }
 
     public function destroyAll()
     {
-        Questionare::truncate();
+        Psychiatrist::truncate();
     }
 }

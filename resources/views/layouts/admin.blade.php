@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-  <title>Admin Panel</title>  
+  <title>Admin Panel</title>
 
   <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
   <link rel="stylesheet" href="{{ asset('bower_components/admin-lte/dist/css/adminlte.min.css') }}">
@@ -66,21 +66,21 @@
           <img src="{{ asset('bower_components/admin-lte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Sedaph</a>
+          <a href="#" class="d-block">{{auth()->user()->name}}</a>
         </div>
       </div>
 
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{route('admin.dashboard')}}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview @if(in_array(Request::segment(2), ['psychiatrist', 'questionare', 'article'])) menu-open @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -88,8 +88,8 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item has-treeview">
+            <ul class="nav nav-treeview menu-open">
+              <li class="nav-item has-treeview @if(Request::segment(2) == 'psychiatrist') menu-open @endif">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
@@ -97,22 +97,22 @@
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="ml-4 nav nav-treeview">
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.psychiatrist.index')}}" class="nav-link @if(Request::segment(2) == 'psychiatrist' && Request::segment(3) == '') active @endif">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>List</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.psychiatrist.create')}}" class="nav-link @if(Request::segment(2) == 'psychiatrist' && Request::segment(3) == 'create') active @endif">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Tambah</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
+              <li class="nav-item has-treeview @if(Request::segment(2) == 'article') menu-open @endif">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
@@ -120,22 +120,22 @@
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="ml-4 nav nav-treeview">
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.article.index')}}" class="nav-link @if(Request::segment(2) == 'article' && Request::segment(3) == '') active @endif">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>List</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.article.create')}}" class="nav-link @if(Request::segment(2) == 'article' && Request::segment(3) == 'create') active @endif">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Tambah</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item has-treeview">
+              <li class="nav-item has-treeview @if(Request::segment(2) == 'questionare') menu-open @endif">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>
@@ -143,15 +143,15 @@
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="ml-4 nav nav-treeview">
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.questionare.index')}}" class="nav-link @if(Request::segment(2) == 'questionare' && Request::segment(3) == '') active @endif">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>List</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('admin.questionare.create')}}" class="nav-link @if(Request::segment(2) == 'questionare' && Request::segment(3) == 'create') active @endif">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Tambah</p>
                     </a>
@@ -160,16 +160,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Media
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview @if(in_array(Request::segment(2), ['profile', 'change-password'])) menu-open @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -179,26 +170,27 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.profile.index')}}" class="nav-link @if(Request::segment(2) == 'profile') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Profil</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.change.password')}}" class="nav-link @if(Request::segment(2) == 'change-password') active @endif">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Ganti Password</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <form action="{{route('logout')}}" id="logout" method="post" class="d-none">@csrf</form>
+                  <a href="javascript:void(0);" onclick="$('#logout').submit()" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
                   <p>Keluar</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview d-none">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cogs"></i>
               <p>
@@ -263,6 +255,7 @@
 <script src="{{ asset('bower_components/admin-lte/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('bower_components/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
 <script src="{{ asset('bower_components/admin-lte/dist/js/adminlte.min.js') }}"></script>
+<script src="https://cdn.ckeditor.com/4.14.0/standard-all/ckeditor.js"></script>
 <script src="{{ asset('js/app.js') }}" defer></script>
 <script src="{{ asset('js/admin.js') }}"></script>
 

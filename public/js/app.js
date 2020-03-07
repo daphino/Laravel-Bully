@@ -52404,6 +52404,18 @@ try {
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
 
+var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  onOpen: function onOpen(toast) {
+    toast.addEventListener('mouseenter', sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.stopTimer);
+    toast.addEventListener('mouseleave', sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a.resumeTimer);
+  }
+});
+window.Toast = Toast;
 window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_0___default.a;
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -52428,8 +52440,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/sedaph/Desktop/LaravelProjects/Bulliying/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/sedaph/Desktop/LaravelProjects/Bulliying/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\11120\Documents\Laravel-Bully\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\11120\Documents\Laravel-Bully\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

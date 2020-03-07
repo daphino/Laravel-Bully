@@ -17,11 +17,11 @@
           <div class="card-body">
             <div class="form-group">
               <label>Pertanyaan <sup>*</sup></label>
-              <textarea name="question" placeholder="Masukkan pertanyaan kuesioner" class="form-control">{{ $questionare->question }}</textarea>
+              <textarea name="question" placeholder="Masukkan pertanyaan kuesioner" required class="form-control">{{ $questionare->question }}</textarea>
             </div>
             <div class="form-group">
               <label>Tipe Pertanyaan <sup>*</sup></label>
-              <select name="type" class="form-control">
+              <select name="type" class="form-control" required>
                 <option @if($questionare->type == '') selected="selected" @endif value="">-- Pilih</option>
                 <option @if($questionare->type == 'input') selected="selected" @endif value="input">Input Text (User menginputkan jawaban)</option>
                 <option @if($questionare->type == 'check') selected="selected" @endif value="check">Chechbox (User memilih beberapa pilihan)</option>
@@ -31,12 +31,12 @@
             </div>
             <div class="form-group">
               <label>Urutan <sup>*</sup></label>
-              <input type="number" value="{{ $questionare->order }}" name="order" placeholder="Masukkan urutan pertanyaan yg ditampilkan" class="form-control" min="1">
+              <input type="number" required value="{{ $questionare->order }}" name="order" placeholder="Masukkan urutan pertanyaan yg ditampilkan" class="form-control" min="1">
             </div>
           </div>
         </div>
       </div>
-      
+
       @if($questionare->type != 'input')
         <div class="col-md-6" id="options">
           <div class="card">
@@ -49,18 +49,23 @@
                   Tambahkan pilihan jawaban dari pertanyaan yang diberikan!
                 </p>
               </div>
-              
-              @foreach( json_decode($questionare->options) as $k => $v )
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Pilihan {{$k+1}}</span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Masukkan pilihan {{$k+1}}" value="{{ $v }}">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fas fa-minus"></i></button>
-                  </div>
-                </div>
-              @endforeach
+
+              <div class="options">
+                  @foreach( json_decode($questionare->options) as $k => $v )
+                      <div class="input-group mb-3 option-item" id="el-{{$k}}">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text">Pilihan {{$k+1}}</span>
+                          </div>
+                          <input type="text" class="form-control" name="options[]" required placeholder="Masukkan pilihan {{$k+1}}" value="{{ $v }}">
+                          @if($k < 1)
+                          <div class="input-group-append">
+                              <button class="btn btn-outline-secondary" type="button" id="delete-item"><i class="fas fa-minus"></i></button>
+                              <button class="btn btn-outline-secondary" type="button" id="add-item"><i class="fas fa-plus"></i></button>
+                          </div>
+                          @endif
+                      </div>
+                  @endforeach
+              </div>
 
             </div>
           </div>
