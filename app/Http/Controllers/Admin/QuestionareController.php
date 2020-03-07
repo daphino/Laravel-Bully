@@ -16,6 +16,7 @@ class QuestionareController extends Controller
     public function index()
     {
         $data['questionares'] = Questionare::orderBy('order', 'asc')->get();
+        dd($data['questionares']);
         $data['title'] = 'Daftar Kuesioner';
         return view('questionare-index')->with($data);
     }
