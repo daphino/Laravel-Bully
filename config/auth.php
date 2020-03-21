@@ -51,6 +51,11 @@ return [
             'driver' => 'session',
             'provider' => 'customers',
         ],
+
+        'psychiatrist' => [
+            'driver' => 'session',
+            'provider' => 'psychiatrists'
+        ]
     ],
 
     /*
@@ -79,6 +84,11 @@ return [
          'customers' => [
              'driver' => 'eloquent',
              'model' => App\Customer::class,
+         ],
+
+        'psychiatrists' => [
+             'driver' => 'eloquent',
+             'model' => App\Psychiatrist::class,
          ],
     ],
 

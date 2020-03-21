@@ -14,4 +14,11 @@ Route::prefix('customer')->name('customer.')->namespace('Api')->group(function()
     Route::post('login', 'CustomerController@login')->name('login');
 
     Route::post('register', 'CustomerController@register')->name('register');
+    Route::resource('chat', 'ChatController');
+
+});
+
+Route::prefix('psychiatrist')->name('psychiatrist.')->namespace('Api\Psychiatrist')->group(function() {
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::get('info', 'UserController@info')->name('info');
 });

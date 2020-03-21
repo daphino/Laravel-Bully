@@ -24,6 +24,7 @@ class CreatePsychiatristsTable extends Migration
             $table->string('bank_number')->nullable();
             $table->string('profile_img')->nullable();
             $table->boolean('status')->default(true);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

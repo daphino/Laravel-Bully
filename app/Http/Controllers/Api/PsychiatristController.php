@@ -13,4 +13,6 @@ class PsychiatristController extends Controller
         $data = Psychiatrist::all();
         return response()->json($data, 200);
     }
+
+
 }

@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group">
                             <label>Password <sup>*</sup></label>
-                            <input type="text" name="password" class="form-control" readonly value="UXYGDSF7ufat1">
+                            <input type="text" name="password" class="form-control" readonly value="{{$password}}">
                             <small>Harap catat password untuk login psikiater. (Selanjutnya password akan di update oleh ybs.)</small>
                         </div>
                     </div>
